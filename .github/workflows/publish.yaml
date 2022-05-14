@@ -26,6 +26,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
+      - run: npm install
       - run: npm run build
       - name: Publish beta
         if: github.event.prerelease == true
