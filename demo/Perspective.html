@@ -16,10 +16,10 @@
     }
 </style>
 <body>
-<div class="perspective-demo">Perspective Demo Perspective Demo Perspective Demo Perspective Demo Perspective Demo</div>
+    <div class="perspective-demo">Perspective Demo Perspective Demo Perspective Demo Perspective Demo Perspective Demo</div>
+    <script src="node_modules/@aeksandla/animation-pack/Perspective.js"></script>
+    <script>
+      new Perspective(document.querySelector('.perspective-demo'), {perspective: 2000, maxRotateX: 20, maxRotateY: 20})
+    </script>
 </body>
-<script src="node_modules/@aeksandla/animation-pack/Perspective.js"></script>
-<script>
-  new Perspective(document.querySelector('.perspective-demo'), {perspective: 2000, maxRotateX: 20, maxRotateY: 20})
-</script>
 </html>
