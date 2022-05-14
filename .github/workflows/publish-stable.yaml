@@ -1,0 +1,45 @@
+name: Publish stable
+
+on:
+  release:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+      - run: npm run codestyle
+
+  publish-npm:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: npm install
+      - run: npm run build
+      - name: Publish stable
+        if: github.event.prerelease == false
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm}}
+
+#      - name: Build and Deploy dосs
+#        uses: JamesIves/github-pages-deploy-action@master
+#        if: github.event.prerelease == false
+#        env:
+#          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#          BRANCH: gh-pages
+#          FOLDER: docs
+#          BUILD_SCRIPT: npm install && npm run typedoc
