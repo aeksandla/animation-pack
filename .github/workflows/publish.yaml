@@ -2,8 +2,6 @@ name: Publish stable
 
 on:
   release:
-    tags:
-      - 'v*'
 
 jobs:
   test:
