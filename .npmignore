@@ -2,5 +2,6 @@
 /src/
 /demo/
 /.idea
+/.github
 /tsconfig.json
 /webpack.config.js
