@@ -35,7 +35,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
       - name: Publish stable
         if: github.event.prerelease == false
-        run: npm publish --access public --tag beta
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
 
