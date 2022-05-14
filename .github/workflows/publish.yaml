@@ -30,13 +30,13 @@ jobs:
       - run: npm install
       - run: npm run build
       - name: Publish stable
-        if: github.event.prerelease == false
+        if: github.event.release.prerelease == false
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
 
       - name: Publish beta
-        if: github.event.prerelease == true
+        if: github.event.release.prerelease == true
         run: npm publish --access public --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
