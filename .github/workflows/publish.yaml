@@ -1,7 +1,8 @@
-name: Publish stable
+name: Publish
 
 on:
   release:
+    types: [published]
 
 jobs:
   test:
