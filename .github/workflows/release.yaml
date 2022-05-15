@@ -42,18 +42,19 @@ jobs:
 
       - name: Bump version
         run: |
-          export CURRENT=$(npm show @pusher/push-notifications-server | grep latest | cut -d':' -f 2 | xargs)
-          export NEW_VERSION=$(semver bump ${{ env.RELEASE }} $CURRENT)
+          export CURRENT=$(npm version ${{ env.RELEASE }})
+          export NEW_VERSION=$(npm show . version)
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo ${{ env.VERSION }}
 
-      - name: Prepare update
-        run: |
-          sed -i "s|\"version\": \"[^\"]*\"|\"version\": \"${{ env.VERSION }}\"|" package.json
+#      - name: Prepare update
+#        run: |
+#          sed -i "s|\"version\": \"[^\"]*\"|\"version\": \"${{ env.VERSION }}\"|" package.json
 
-      - name: Commit changes
-        run: |
-          git add package.json
-          git commit -m "Bump to version ${{ env.VERSION }}"
+#      - name: Commit changes
+#        run: |
+#          git add package.json
+#          git commit -m "Bump to version ${{ env.VERSION }}"
       - name: Push
         run: git push
 
