@@ -31,6 +31,7 @@ jobs:
 
       - name: Set env.BRANCH
         run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+      - run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)"
 
       - name: Publish stable
         if: github.event.release.prerelease == false && env.BRANCH == 'master'
