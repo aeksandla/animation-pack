@@ -12,7 +12,7 @@ jobs:
         run: echo ${{ github.event.label.name }}
 
       - name: Set major release
-        if: ${{ github.event.label.name == 'release-major' }}
+        if: contains( github.event.pull_request.labels.*.name, 'release-major')
         run: echo "RELEASE=major" >> $GITHUB_ENV
       - name: Set minor release
         if: ${{ github.event.label.name == 'release-minor' }}
