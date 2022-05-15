@@ -94,6 +94,7 @@ jobs:
       - run: |
           git fetch
           git checkout master
+          git pull
       - run: npm install
       - run: npm run build
 
