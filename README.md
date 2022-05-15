@@ -1,4 +1,10 @@
-# animation-pack
+# Animation Pack
+
+<p>
+  <a href="https://github.com/aeksandla/animation-pack/actions/workflows/release.yaml">
+    <img src="https://github.com/nolimits4web/swiper/workflows/Build/badge.svg" alt="Build status"/>
+  </a>
+</p>
 
 ## Animations
 - Perspective
