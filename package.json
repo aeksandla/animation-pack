@@ -5,6 +5,9 @@
   "dependencies": {
     "animation-pack": "0.0.6"
   },
+  "scripts": {
+    "github-demo": "mkdir public && cp *.html public && cp -r node_modules public"
+  },
   "author": "",
   "license": "ISC"
 }
