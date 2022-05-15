@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "build-dev": "rm -rf ./dist && webpack && cd ./demo && rm -r ./node_modules && yarn",
+    "build-dev": "rm -rf ./dist && webpack && rm -r ./demo/node_modules/animation-pack/dist && cp -r dist ./demo/node_modules/animation-pack/",
     "test": "echo '^_^ Run test script'",
     "codestyle": "echo '-_- Run codestyle script'"
   },
