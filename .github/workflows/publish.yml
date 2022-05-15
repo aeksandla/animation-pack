@@ -1,0 +1,43 @@
+name: Publish
+
+on: [workflow_dispatch]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: |
+          git fetch
+          git checkout master
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+      - run: npm run codestyle
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+
+  publish-npm:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: |
+          git fetch
+          git checkout master
+          git pull
+      - run: npm install
+      - run: npm run build
+
+      - name: Publish stable
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm}}
