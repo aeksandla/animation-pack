@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@aeksandla/animation-pack@0.0.1-alpha.2":
-  version "0.0.1-alpha.2"
-  resolved "https://registry.yarnpkg.com/@aeksandla/animation-pack/-/animation-pack-0.0.1-alpha.2.tgz#9ee132047835733e5e44a1cb7392b85738e00e45"
-  integrity sha512-cjpeGd8M8EcaDcZbl0lnP3QuJbsDg86zoq3nYoGx6m3rn13QYwOwlmbT+ZmOoB3eMrrHmMLd2Fzj3V34oJDCcg==
+animation-pack@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/animation-pack/-/animation-pack-0.0.6.tgz#d67ff847e65d5582aed31a3810be210eba9b9862"
+  integrity sha512-3ivRZ92pBlK8G+mSnGlBJpogTAZhsect2llVk8pH8SZtAnCxRRSWXE8gHf+crP77Fwy5pxYJsCcWrkfCq0OdJQ==
