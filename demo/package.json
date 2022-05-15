@@ -2,9 +2,8 @@
   "name": "demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "dependencies": {
-    "@aeksandla/animation-pack": "../dist"
+    "@aeksandla/animation-pack": "0.0.2"
   },
   "author": "",
   "license": "ISC"

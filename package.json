@@ -1,8 +1,9 @@
 {
   "name": "@aeksandla/animation-pack",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Animations library",
   "dependencies": {},
+  "main": "",
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "babel-loader": "^8.2.5",
@@ -12,8 +13,10 @@
     "webpack-cli": "^4.9.2"
   },
   "scripts": {
-    "build": "rm -rf ./dist && webpack",
-    "build-dev": "rm -rf ./dist && webpack && cd ./demo && rm -r ./node_modules && yarn"
+    "build": "webpack",
+    "build-dev": "rm -rf ./dist && webpack && cd ./demo && rm -r ./node_modules && yarn",
+    "test": "echo '^_^ Run test script'",
+    "codestyle": "echo '-_- Run codestyle script'"
   },
   "repository": {
     "type": "git",
