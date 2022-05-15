@@ -2,9 +2,20 @@ name: Release
 
 on:
   pull_request:
-    types: [ labeled ]
+    types: [ closed ]
+    branches:
+      - 'master'
 
 jobs:
+  check-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check merge
+        if: github.event.pull_request.merged == false
+        run: |
+          echo "Pull request not mergeg"
+          exit 1
+
   prepare-release:
     runs-on: ubuntu-latest
     steps:
