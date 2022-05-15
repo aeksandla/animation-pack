@@ -39,7 +39,7 @@ jobs:
           git config user.email "pusher-ci@pusher.com"
           git config user.name "Pusher CI"
           git fetch
-          git checkout ${{ github.event.pull_request.head.ref }}
+          git checkout master
 
       - name: Bump version
         run: |
@@ -48,14 +48,6 @@ jobs:
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo ${{ env.VERSION }}
 
-#      - name: Prepare update
-#        run: |
-#          sed -i "s|\"version\": \"[^\"]*\"|\"version\": \"${{ env.VERSION }}\"|" package.json
-
-#      - name: Commit changes
-#        run: |
-#          git add package.json
-#          git commit -m "Bump to version ${{ env.VERSION }}"
       - name: Push
         run: git push
 
