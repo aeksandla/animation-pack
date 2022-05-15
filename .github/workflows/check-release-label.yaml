@@ -1,9 +1,7 @@
-name: Release
+name: Check label
 
 on:
   - pull_request
-  - label
-  - push
 jobs:
   check:
     runs-on: ubuntu-latest
