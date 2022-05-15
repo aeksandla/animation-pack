@@ -8,9 +8,6 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Print label
-        run: echo ${{ github.event.label.name }}
-
       - name: Set major release
         if: contains( github.event.pull_request.labels.*.name, 'release-major')
         run: echo "RELEASE=major" >> $GITHUB_ENV
@@ -20,6 +17,9 @@ jobs:
       - name: Set patch release
         if: contains( github.event.pull_request.labels.*.name, 'release-patch')
         run: echo "RELEASE=patch" >> $GITHUB_ENV
+
+      - name: Print release type
+        run: echo ${{ env.RELEASE }}
 
       - name: Check release env
         run: |

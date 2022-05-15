@@ -11,7 +11,6 @@ jobs:
     steps:
       - name: Print label
         run: echo ${{ github.event.label.name }}
-
       - name: Set major release
         if: ${{ github.event.label.name == 'release-major' }}
         run: echo "RELEASE=major" >> $GITHUB_ENV
@@ -21,7 +20,6 @@ jobs:
       - name: Set patch release
         if: ${{ github.event.label.name == 'release-patch' }}
         run: echo "RELEASE=patch" >> $GITHUB_ENV
-
       - name: Check release env
         run: |
           if [[ -z "${{ env.RELEASE }}" ]];
