@@ -64,6 +64,7 @@ jobs:
           release_name: ${{ env.VERSION }}
 
   tests:
+    needs: prepare-release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
