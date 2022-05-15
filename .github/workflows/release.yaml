@@ -32,7 +32,6 @@ jobs:
           fi
 
       - name: Setup git
-        uses: actions/checkout@v3
         run: |
           git config user.email "pusher-ci@pusher.com"
           git config user.name "Pusher CI"
