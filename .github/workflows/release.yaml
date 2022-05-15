@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print label
-        run: github.event.label.name
+        run: echo github.event.label.name
 
       - name: Set major release
         if: ${{ github.event.label.name == 'release-major' }}
