@@ -1,0 +1,95 @@
+name: Release
+
+on:
+  pull_request:
+    types: [ labeled ]
+
+jobs:
+  prepare-release:
+    steps:
+      - name: Print label
+        run: github.event.label.name
+
+      - name: Set major release
+        if: ${{ github.event.label.name == 'release-major' }}
+        run: echo "RELEASE=major" >> $GITHUB_ENV
+      - name: Set minor release
+        if: ${{ github.event.label.name == 'release-minor' }}
+        run: echo "RELEASE=minor" >> $GITHUB_ENV
+      - name: Set patch release
+        if: ${{ github.event.label.name == 'release-patch' }}
+        run: echo "RELEASE=patch" >> $GITHUB_ENV
+
+      - name: Check release env
+        run: |
+          if [[ -z "${{ env.RELEASE }}" ]];
+          then
+            echo "You need to set a release label on PRs to the main branch"
+            exit 1
+          else
+            exit 0
+          fi
+
+      - name: Setup git
+        run: |
+          git config user.email "pusher-ci@pusher.com"
+          git config user.name "Pusher CI"
+          git fetch
+          git checkout ${{ github.event.pull_request.head.ref }}
+
+      - name: Bump version
+        run: |
+          export CURRENT=$(npm show @pusher/push-notifications-server | grep latest | cut -d':' -f 2 | xargs)
+          export NEW_VERSION=$(semver bump ${{ env.RELEASE }} $CURRENT)
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Prepare update
+        run: |
+          sed -i "s|\"version\": \"[^\"]*\"|\"version\": \"${{ env.VERSION }}\"|" package.json
+
+      - name: Commit changes
+        run: |
+          git add package.json
+          git commit -m "Bump to version ${{ env.VERSION }}"
+      - name: Push
+        run: git push
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.VERSION }}
+          release_name: ${{ env.VERSION }}
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+      - run: npm run codestyle
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+
+  publish-npm:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: npm install
+      - run: npm run build
+
+      - name: Publish stable
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm}}
