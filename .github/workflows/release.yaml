@@ -5,11 +5,19 @@ on:
     types: [ closed ]
 
 jobs:
-  check-merge:
+  check-target-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Print target branch
-        run: echo ${{ github.base_ref }}
+      - name: Check branch
+        if: github.base_ref != master
+        run: |
+          echo "Target branch is not master"
+          exit 1
+
+  check-merge:
+    needs: check-target-branch
+    runs-on: ubuntu-latest
+    steps:
       - name: Check merge
         if: github.event.pull_request.merged == false
         run: |
