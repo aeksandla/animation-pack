@@ -1,34 +1,47 @@
 name: Release
 
+#on:
+#  pull_request:
+#    types: [ closed ]
+
 on:
-  pull_request:
-    types: [ closed ]
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'https://semver.org/lang/ru/ '
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - majore
 
 jobs:
   prepare-release:
-    if: github.base_ref == 'master' && github.event.pull_request.merged == true
+#    if: github.base_ref == 'master' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Set major release
-        if: contains( github.event.pull_request.labels.*.name, 'release-major')
-        run: echo "RELEASE=major" >> $GITHUB_ENV
-      - name: Set minor release
-        if: contains( github.event.pull_request.labels.*.name, 'release-minor')
-        run: echo "RELEASE=minor" >> $GITHUB_ENV
-      - name: Set patch release
-        if: contains( github.event.pull_request.labels.*.name, 'release-patch')
-        run: echo "RELEASE=patch" >> $GITHUB_ENV
-      - name: Print release type
-        run: echo ${{ env.RELEASE }}
-      - name: Check release env
-        run: |
-          if [[ -z "${{ env.RELEASE }}" ]];
-          then
-            echo "You need to set a release label on PRs to the main branch"
-            exit 1
-          else
-            exit 0
-          fi
+#      - name: Set major release
+#        if: contains( github.event.pull_request.labels.*.name, 'release-major')
+#        run: echo "RELEASE=major" >> $GITHUB_ENV
+#      - name: Set minor release
+#        if: contains( github.event.pull_request.labels.*.name, 'release-minor')
+#        run: echo "RELEASE=minor" >> $GITHUB_ENV
+#      - name: Set patch release
+#        if: contains( github.event.pull_request.labels.*.name, 'release-patch')
+#        run: echo "RELEASE=patch" >> $GITHUB_ENV
+#      - name: Print release type
+#        run: echo ${{ env.RELEASE }}
+#      - name: Check release env
+#        run: |
+#          if [[ -z "${{ env.RELEASE }}" ]];
+#          then
+#            echo "You need to set a release label on PRs to the main branch"
+#            exit 1
+#          else
+#            exit 0
+#          fi
 
       - name: Git checkout
         uses: actions/checkout@v2
@@ -41,7 +54,8 @@ jobs:
 
       - name: Bump version
         run: |
-          export NEW_VERSION=$(npm version ${{ env.RELEASE }})
+#          export NEW_VERSION=$(npm version ${{ env.RELEASE }})
+          export NEW_VERSION=$(npm version ${{ github.event.inputs.type }})
           echo "LIBRARY_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo ${{ env.LIBRARY_VERSION }}
           echo $( npm show . version )
