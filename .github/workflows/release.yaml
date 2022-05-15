@@ -41,9 +41,9 @@ jobs:
 
       - name: Bump version
         run: |
-          echo "LIBRARY_VERSION=$(npm version ${{ env.RELEASE }})" >> $GITHUB_ENV
-#          export NEW_VERSION=$(npm show . version)
-#          echo "LIBRARY_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+#          echo "LIBRARY_VERSION=$(npm version ${{ env.RELEASE }})" >> $GITHUB_ENV
+          export NEW_VERSION=$(npm version ${{ env.RELEASE }})
+          echo "LIBRARY_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo ${{ env.LIBRARY_VERSION }}
           echo $( npm show . version )
 
