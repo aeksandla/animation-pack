@@ -13,10 +13,11 @@ jobs:
       - name: Check merge
         if: github.event.pull_request.merged == false
         run: |
-          echo "Pull request not mergeg"
+          echo "Pull request not merged"
           exit 1
 
   prepare-release:
+    needs: check-merge
     runs-on: ubuntu-latest
     steps:
       - name: Print label
