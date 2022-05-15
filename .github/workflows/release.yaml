@@ -42,8 +42,8 @@ jobs:
       - name: Bump version
         run: |
           npm version ${{ env.RELEASE }}
-#          export NEW_VERSION=$(npm show . version)
-          echo "VERSION=$(npm show . version)" >> $GITHUB_ENV
+          export NEW_VERSION=$(npm show . version)
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo ${{ env.VERSION }}
 
       - name: Push
@@ -51,6 +51,7 @@ jobs:
 
       - name: Prepare tag
         run: |
+          echo ${{ env.VERSION }}
           export TAG=${{ env.VERSION }}
           echo "TAG=$TAG" >> $GITHUB_ENV
 
