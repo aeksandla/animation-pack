@@ -3,13 +3,13 @@ name: Release
 on:
   pull_request:
     types: [ closed ]
-    branches:
-      - 'master'
 
 jobs:
   check-merge:
     runs-on: ubuntu-latest
     steps:
+      - name: Print target branch
+        run: echo ${{ github.base_ref }}
       - name: Check merge
         if: github.event.pull_request.merged == false
         run: |
