@@ -3,7 +3,6 @@ name: Publish
 on:
   release:
     types: [published]
-    branches: [master]
 
 jobs:
   test:
@@ -29,11 +28,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: npm run build
-      - name: Publish stable
-        if: github.event.release.prerelease == false
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm}}
 
       - name: Publish beta
         if: github.event.release.prerelease == true
