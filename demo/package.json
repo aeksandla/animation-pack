@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "@aeksandla/animation-pack": "0.0.2"
+    "animation-pack": "0.0.6"
   },
   "author": "",
   "license": "ISC"
