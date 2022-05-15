@@ -45,6 +45,7 @@ jobs:
           export NEW_VERSION=$(npm show . version)
           echo "LIBRARY_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo ${{ env.LIBRARY_VERSION }}
+          echo $( npm show . version )
 
       - name: Push
         run: git push
