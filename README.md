@@ -5,6 +5,7 @@
 
 ## Animations
 - Perspective
+- FlyingAway
 
 ## Usage
 ```html

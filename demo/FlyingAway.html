@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>FlyingAway Demo</title>
+</head>
+<style>
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 200px;
+    }
+    .flying-away-demo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 200px;
+        width: 400px;
+        background: #aafff7;
+    }
+</style>
+<body>
+<div class="flying-away-demo">FlyingAway Demo</div>
+<script src="node_modules/animation-pack/dist/FlyingAway.js"></script>
+<script>
+  new FlyingAway(document.querySelector('.flying-away-demo'), {})
+</script>
+</body>
+</html>

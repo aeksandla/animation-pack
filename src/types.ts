@@ -4,3 +4,9 @@ export type PerspectiveOptionsType = {
   perspective?: number;
   resetTransition?: string;
 }
+
+export type FlyingAwayOptionsType = {
+  maxOffsetX?: number;
+  maxOffsetY?: number;
+  transition?: string;
+}
